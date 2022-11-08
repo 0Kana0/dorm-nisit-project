@@ -1,17 +1,30 @@
 import React, { useState } from 'react'
 import { Table, Container, Button } from 'react-bootstrap'
+import { ImCheckmark, ImCross } from 'react-icons/im'
 
 const Utilities = () => {
   // Data Mockup จำลองข้อมูลก่อน ค่อยมาเปลี่ยนเป็น Fetch จาก Backend ทีหลัง
   const [utils, setUtils] = useState([
     { 
+      id:1,
       room:'2208',
       issueDate:'2022-9-31',
       dueDate:'2022-10-31',
       water:60,
       electric:280,
       fine:0,
-    }
+      paid:false,
+    },
+    { 
+      id:2,
+      room:'2316',
+      issueDate:'2022-9-31',
+      dueDate:'2022-10-31',
+      water:80,
+      electric:300,
+      fine:0,
+      paid:false,
+    },
   ])
 
   const options = {
@@ -21,10 +34,21 @@ const Utilities = () => {
     year:'numeric',
   }
 
+  const paidUtils = (id,paid) => {
+    const mappedUtils = utils.map((item)=>{
+      if (item.id === id) {
+        item.paid = paid
+        return item
+      }
+      return item
+    })
+    setUtils(mappedUtils)
+  }
+
   const utilsTable = utils.map((item,index)=>{
     return (
       <tr key={index}>
-        <td>{index}</td>
+        <td>{index + 1}</td>
         <td>{item.room}</td>
         <td>{new Date(item.issueDate).toLocaleDateString('th-TH',options)}</td>
         <td>{item.water}</td>
@@ -32,8 +56,19 @@ const Utilities = () => {
         <td>{item.fine}</td>
         <td>{item.water + item.electric + item.fine}</td>
         <td>{new Date(item.dueDate).toLocaleDateString('th-TH',options)}</td>
+        <td>{item.paid ? 
+          <>
+            <ImCheckmark style={{color:'green'}}/>{' '}
+            ชำระแล้ว
+          </> : 
+          <>
+            <ImCross style={{color:'darkred'}}/>{' '}
+            ค้างชำระ
+          </>
+          }
+        </td>
         <td className='d-grid'>
-          <Button variant="outline-success">ชำระ</Button>
+          <Button variant="outline-success" onClick={()=>paidUtils(item.id,!item.paid)}>ชำระ</Button>
         </td>
       </tr>
     )
@@ -57,6 +92,7 @@ const Utilities = () => {
             <th>ค่าปรับ</th>
             <th>รวม</th>
             <th>หมดเขตวันที่</th>
+            <th>สถานะ</th>
             <th>รายละเอียด</th>
           </tr>
         </thead>
