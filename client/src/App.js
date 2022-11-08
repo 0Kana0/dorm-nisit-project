@@ -6,7 +6,7 @@ import Login from "./components/pages/auth/Login"
 import Home from './components/pages/Home'
 
 //page
-import Utilities from './components/pages/Utilities'
+import Utilities from './components/pages/admin/Utilities'
 
 // page admin
 import AdminHome from './components/pages/admin/AdminHome'
@@ -35,6 +35,9 @@ import { useDispatch } from 'react-redux'
 // Routes
 import UserRoute from './components/routes/UserRoute'
 import AdminRoute from './components/routes/AdminRoute'
+
+// Navbar
+import NavbarAdmin from './components/layouts/NavbarAdmin'
 
 function App() {
   const dispatch = useDispatch()
@@ -148,7 +151,9 @@ function App() {
     </Routes>
     <AdminRoute>
       <Routes>
-        <Route path="/admin/utilities" element={<Utilities/>}/>
+        <Route element={<NavbarAdmin/>}>
+          <Route path="/admin/utilities" element={<Utilities/>}/>
+        </Route>
       </Routes>
     </AdminRoute>
     </>
