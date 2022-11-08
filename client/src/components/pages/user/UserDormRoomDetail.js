@@ -4,7 +4,8 @@ import { Link, useParams, useNavigate } from "react-router-dom";
 
 // function
 import { listDormRoomID } from '../../functions/dormRoom'
-import { listSubmit } from '../../functions/submit';
+import { listSubmit, createSubmit } from '../../functions/submit';
+import { readUsers, updateUserBookTrue } from '../../functions/user'
 
 // redux
 import { useSelector } from 'react-redux';
@@ -16,11 +17,12 @@ const UserDormRoomDetail = () => {
 	const [dorm, setDorm] = useState([])
 	const [room, setRoom] = useState([])
 	const [submit, setSubmit] = useState([])
-	const [users,setUsers] = useState([])
+	const [userdata, setUserdata] = useState([])
 
 	useEffect(() => {
 		loadData(user.token, param.id)
 		loadDataSubmit(user.token, param.id)
+		loadDataUser(user.token, user.id)
 	}, [])
 
 	const loadData = (authtoken, id) => {
@@ -34,6 +36,16 @@ const UserDormRoomDetail = () => {
 			})
 	}
 
+	const loadDataUser = (authtoken, id) => {
+    readUsers(authtoken, id)
+      .then((res) => {
+        setUserdata(res.data)
+      })
+      .catch((err) => {
+        console.log(err)
+      })
+  }
+
 	const loadDataSubmit = (authtoken, id) => {
 		listSubmit(authtoken, id)
 			.then((res) => {
@@ -45,9 +57,31 @@ const UserDormRoomDetail = () => {
 			})
 	}
 
+	const onSubmit = () => {
+		createSubmit(user.token, {dormroom:param.id,user:user.id})
+			.then((res) => {
+				console.log(res.data)
+				alert('จองห้องสำเร็จ')
+				window.location.reload();
+			})
+			.catch((err) => {
+				console.log(err)
+			})
+	}
+
+	const onChangeBookState = () => {
+		updateUserBookTrue(user.token, user.id)
+			.then((res) => {
+				console.log(res.data)
+			})
+			.catch((err) => {
+				console.log(err)
+			})
+	}
+
 	const userSubmit = submit.map((item)=>{
 		return (
-			<tr>
+			<tr key={item._id}>
 				<th scope="col">{item.user.studentID}</th>
 				<td>{item.user.firstname} {item.user.lastname}</td>
 				<td>{item.user.faculty}</td>
@@ -100,10 +134,16 @@ const UserDormRoomDetail = () => {
 		}
 	}
 
-	const onSubmit = (e) => {
-		e.preventDefault()
-		console.log(user.id)
-		console.log(param.id)
+	const ShowButton = (state) => {
+		if (state) {
+			return (
+				<button disabled className="col-md-6 btn btn-outline-primary profile-button" onClick={()=>{onSubmit();onChangeBookState()}}>จองห้อง</button>
+			)
+		} else {
+			return (
+				<button className="col-md-6 btn btn-outline-primary profile-button" onClick={()=>{onSubmit();onChangeBookState()}}>จองห้อง</button>
+			)
+		}
 	}
 
 	return (
@@ -160,7 +200,7 @@ const UserDormRoomDetail = () => {
 				<ShowData />
 				<br /><hr />
 				<div className='d-flex justify-content-center'>
-					<button className="col-md-6 btn btn-outline-primary profile-button" onClick={onSubmit}>จองห้อง</button>
+					{ShowButton(userdata.bookedState)}
 				</div>
 			</div>
 		</div>

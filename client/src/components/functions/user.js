@@ -23,3 +23,13 @@ export const updateUsers = async(authtoken, id, value) => {
     }
   });
 }
+
+export const updateUserBookTrue = async(authtoken, id) => {
+  console.log(authtoken)
+  console.log(id)
+  return await axios.put(process.env.REACT_APP_API + "/users/book/" + id, {
+    headers:{
+      authtoken,
+    }
+  });
+}

@@ -2,7 +2,10 @@ const Submit = require('../models/Submit')
 
 exports.createSubmit = async(req,res)=>{
 	try {
-    const submit = await new Submit(req.body).save()
+    const { dormroom, user } = req.body
+    const submit = await new Submit({
+      dormroom, user
+    }).save()
     res.send(submit)
   } catch (err) {
     console.log(err)

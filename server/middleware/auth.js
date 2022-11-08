@@ -4,6 +4,7 @@ const User = require("../models/User")
 exports.auth = (req,res,next) => {
 	try {
     const token = req.headers["authtoken"]
+    console.log(token)
     if (!token) {
       return res.status(401).send('No Token!')
     }

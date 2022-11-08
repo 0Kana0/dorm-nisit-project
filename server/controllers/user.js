@@ -49,3 +49,14 @@ exports.removeUsers = async(req,res)=>{
 	  res.status(500).send('Server Error!')
 	}
 }
+
+exports.updateUserBookTrue = async(req,res)=>{
+	try{
+		const id = req.params.id
+		const user = await User.findByIdAndUpdate({_id:id},{bookedState:true})
+	 	res.send(user)
+	}catch(err){
+	  console.log(err)
+	  res.status(500).send('updateUsers Error!')
+	}
+}
