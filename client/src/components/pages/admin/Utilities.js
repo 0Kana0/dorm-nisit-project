@@ -68,7 +68,10 @@ const Utilities = () => {
           }
         </td>
         <td className='d-grid'>
-          <Button variant="outline-success" onClick={()=>paidUtils(item.id,!item.paid)}>ชำระ</Button>
+          {item.paid ?
+            <Button variant="outline-danger" onClick={()=>paidUtils(item.id,!item.paid)}>ยกเลิก</Button> :
+            <Button variant="outline-success" onClick={()=>paidUtils(item.id,!item.paid)}>ชำระ</Button>
+          }
         </td>
       </tr>
     )
@@ -81,7 +84,7 @@ const Utilities = () => {
         <Button variant="outline-success">เพิ่มบิลค่าไฟ</Button>
       </div>
       <hr></hr>
-      <Table responsive hover bordered>
+      <Table responsive hover >
         <thead>
           <tr>
             <th>ลำดับ</th>
@@ -96,7 +99,7 @@ const Utilities = () => {
             <th>รายละเอียด</th>
           </tr>
         </thead>
-        <tbody>
+        <tbody className='table-group-divider'>
           {utilsTable}
         </tbody>
       </Table>
