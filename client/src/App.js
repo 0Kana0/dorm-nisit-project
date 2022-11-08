@@ -149,13 +149,17 @@ function App() {
         </UserRoute>
       } />
     </Routes>
-    <AdminRoute>
+
       <Routes>
-        <Route element={<NavbarAdmin/>}>
+        <Route element={
+          <AdminRoute>
+            <NavbarAdmin/>
+          </AdminRoute>
+        }>
           <Route path="/admin/utilities" element={<Utilities/>}/>
         </Route>
+
       </Routes>
-    </AdminRoute>
     </>
   );
 }
