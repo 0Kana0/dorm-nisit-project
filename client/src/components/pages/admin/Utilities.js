@@ -34,9 +34,9 @@ const Utilities = () => {
     year:'numeric',
   }
 
-  const paidUtils = (id,paid) => {
+  const paidUtils = (currentItem,paid) => {
     const mappedUtils = utils.map((item)=>{
-      if (item.id === id) {
+      if (item === currentItem) {
         item.paid = paid
         return item
       }
@@ -69,8 +69,8 @@ const Utilities = () => {
         </td>
         <td className='d-grid'>
           {item.paid ?
-            <Button variant="outline-danger" onClick={()=>paidUtils(item.id,!item.paid)}>ยกเลิก</Button> :
-            <Button variant="outline-success" onClick={()=>paidUtils(item.id,!item.paid)}>ชำระ</Button>
+            <Button variant="outline-danger" onClick={()=>paidUtils(item,!item.paid)}>ยกเลิก</Button> :
+            <Button variant="outline-success" onClick={()=>paidUtils(item,!item.paid)}>ชำระ</Button>
           }
         </td>
       </tr>
