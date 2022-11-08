@@ -82,7 +82,7 @@ const Login = () => {
                   <label className="col-form-label">รหัสผ่าน (Password)</label>
                   <input type="password" className="form-control" name="password" placeholder="Password" required onChange={handleChange} />
                 </div>
-                <Link className="nav-link mt-2" to="/register"><p className="d-flex flex-row-reverse">สมัครสมาชิก</p></Link>
+                <p className="d-flex flex-row-reverse"><Link className="nav-link mt-2" to="/register">สมัครสมาชิก</Link></p>
                 <button className="mt-4 col-md-12 btn btn-outline-primary profile-button">เข้าสู่ระบบ</button>
               </form>
             </div>

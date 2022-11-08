@@ -12,8 +12,10 @@ exports.listDorm = async(req,res)=>{
 
 exports.createDorm = async(req,res)=>{
 	try {
-    const { name } = req.body
-    const dorm = await new Dorm({name}).save()
+    const { name, dormType, dormFloor, dormRoom, dormImg } = req.body
+    const dorm = await new Dorm({
+      name, dormType, dormFloor, dormRoom, dormImg
+    }).save()
     res.send(dorm)
   } catch (err) {
     console.log(err)
@@ -24,6 +26,7 @@ exports.createDorm = async(req,res)=>{
 exports.readDorm = async(req,res)=>{
 	try {
     const id = req.params.id
+    console.log(id)
     const dorm = await Dorm.findOne({_id:id})
     res.send(dorm)
   } catch (err) {
@@ -35,8 +38,8 @@ exports.readDorm = async(req,res)=>{
 exports.updateDorm = async(req,res)=>{
 	try {
     const id = req.params.id
-    const { name } = req.body
-    const dorm = await Dorm.findOneAndUpdate({_id:id},{name:name})
+    const { name, dormType, dormFloor, dormRoom, dormImg } = req.body
+    const dorm = await Dorm.findOneAndUpdate({_id:id},req.body)
     res.send(dorm)
   } catch (err) {
     console.log(err)

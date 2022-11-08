@@ -18,11 +18,18 @@ const DormRoomSchema = new mongoose.Schema({
 	roomtype:{
     type:String,
   },
+	member:{
+		type:Number,
+	},
 	price:{
 		type:Number,
 	},
+	roomState:{
+		type:Boolean,
+		default: true
+	},
 	images:{
-		type:Array,
+		type:String,
 	},
 },{timestamps: true});
 

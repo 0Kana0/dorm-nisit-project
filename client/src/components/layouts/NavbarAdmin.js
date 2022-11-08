@@ -21,7 +21,7 @@ const NavbarAdmin = () => {
         <div className="collapse navbar-collapse" id="navbarToggle">
           <ul className="navbar-nav">
             <li className="nav-item">
-              <Link className="nav-link">จองห้องพัก</Link>
+              <Link className="nav-link" to='/admin/dormlist'>จองห้องพัก</Link>
             </li>
             <li className="nav-item">
               <Link className="nav-link">ค่าไฟฟ้า</Link>

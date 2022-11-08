@@ -12,12 +12,18 @@ import AdminDashboard from './components/pages/admin/AdminDashboard'
 import AdminCreateDorm from './components/pages/admin/AdminCreateDorm'
 import AdminUpdateDorm from './components/pages/admin/AdminUpdateDorm'
 import AdminCreateDormRoom from './components/pages/admin/AdminCreateDormRoom'
+import AdminDormList from './components/pages/admin/AdminDormList'
+import AdminDormRoomList from './components/pages/admin/AdminDormRoomList'
+import AdminDormRoomDetail from './components/pages/admin/AdminDormRoomDetail'
+import AdminUpdateDormRoom from './components/pages/admin/AdminUpdateDormRoom'
 
 // page user
 import UserHome from './components/pages/user/UserHome'
 import UserDashboard from './components/pages/user/UserDashboard'
 import UserProfileEdit from './components/pages/user/UserProfileEdit'
 import UserDormList from './components/pages/user/UserDormList'
+import UserDormRoomList from './components/pages/user/UserDormRoomList'
+import UserDormRoomDetail from './components/pages/user/UserDormRoomDetail'
 
 // functions
 import { currentUser } from './components/functions/auth'
@@ -64,6 +70,11 @@ function App() {
           <AdminDashboard />
         </AdminRoute>
       } />
+      <Route path="/admin/dormlist" element={
+        <AdminRoute>
+          <AdminDormList />
+        </AdminRoute>
+      } />
       <Route path="/admin/manage-user" element={
         <AdminRoute>
           <AdminManage />
@@ -74,14 +85,29 @@ function App() {
           <AdminCreateDorm/>
         </AdminRoute>
       } />
+      <Route path="/admin/dorm/:id" element={
+        <AdminRoute>
+          <AdminDormRoomList />
+        </AdminRoute>
+      } />
       <Route path="/admin/update-dorm/:id" element={
         <AdminRoute>
           <AdminUpdateDorm/>
         </AdminRoute>
       } />
-      <Route path="/admin/create-dormroom" element={
+      <Route path="/admin/create-dormroom/:id" element={
         <AdminRoute>
           <AdminCreateDormRoom/>
+        </AdminRoute>
+      } />
+      <Route path="/admin/dorm/room/:id" element={
+        <AdminRoute>
+          <AdminDormRoomDetail />
+        </AdminRoute>
+      } />
+      <Route path="/admin/dorm/update-room/:id" element={
+        <AdminRoute>
+          <AdminUpdateDormRoom/>
         </AdminRoute>
       } />
 
@@ -93,6 +119,16 @@ function App() {
       <Route path="/user/dormlist" element={
         <UserRoute>
           <UserDormList />
+        </UserRoute>
+      } />
+      <Route path="/user/dorm/:id" element={
+        <UserRoute>
+          <UserDormRoomList />
+        </UserRoute>
+      } />
+      <Route path="/user/dorm/room/:id" element={
+        <UserRoute>
+          <UserDormRoomDetail />
         </UserRoute>
       } />
       <Route path="/user/dashboard" element={
