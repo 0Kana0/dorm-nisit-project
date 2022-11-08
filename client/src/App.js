@@ -5,6 +5,9 @@ import Register from "./components/pages/auth/Register"
 import Login from "./components/pages/auth/Login"
 import Home from './components/pages/Home'
 
+//page
+import Utilities from './components/pages/Utilities'
+
 // page admin
 import AdminHome from './components/pages/admin/AdminHome'
 import AdminManage from './components/pages/admin/AdminManage'
@@ -56,6 +59,7 @@ function App() {
       })
   }
   return (
+    <>
     <Routes>
       <Route path="/" element={<Login />} />
       <Route path="/register" element={<Register />} />
@@ -142,6 +146,12 @@ function App() {
         </UserRoute>
       } />
     </Routes>
+    <AdminRoute>
+      <Routes>
+        <Route path="/admin/utilities" element={<Utilities/>}/>
+      </Routes>
+    </AdminRoute>
+    </>
   );
 }
 
