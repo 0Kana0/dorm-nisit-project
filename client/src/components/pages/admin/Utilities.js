@@ -80,7 +80,7 @@ const Utilities = () => {
   return (
     <Container className="py-5">
       <div className="d-flex justify-content-between">
-        <h3>ค่าไฟ</h3>
+        <h3>สาธารณูปโภค</h3>
         <Button variant="outline-success">เพิ่มบิลค่าไฟ</Button>
       </div>
       <hr></hr>
