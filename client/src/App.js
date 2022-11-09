@@ -6,7 +6,7 @@ import Login from "./components/pages/auth/Login"
 import Home from './components/pages/Home'
 
 //page
-import Utilities from './components/pages/admin/Utilities'
+import Bill from './components/pages/admin/Bill'
 
 // page admin
 import AdminHome from './components/pages/admin/AdminHome'
@@ -156,7 +156,7 @@ function App() {
             <NavbarAdmin/>
           </AdminRoute>
         }>
-          <Route path="/admin/utilities" element={<Utilities/>}/>
+          <Route path="/admin/bill" element={<Bill/>}/>
         </Route>
 
       </Routes>
