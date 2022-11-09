@@ -7,6 +7,7 @@ import Home from './components/pages/Home'
 
 //page
 import Bill from './components/pages/admin/Bill'
+import CreateBill from './components/pages/admin/CreateBill'
 
 // page admin
 import AdminHome from './components/pages/admin/AdminHome'
@@ -157,6 +158,7 @@ function App() {
           </AdminRoute>
         }>
           <Route path="/admin/bill" element={<Bill/>}/>
+          <Route path="/admin/bill/create" element={<CreateBill/>}/>
         </Route>
 
       </Routes>
