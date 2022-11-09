@@ -151,17 +151,21 @@ function App() {
       } />
     </Routes>
 
-      <Routes>
-        <Route element={
-          <AdminRoute>
-            <NavbarAdmin/>
-          </AdminRoute>
-        }>
-          <Route path="/admin/bill" element={<Bill/>}/>
-          <Route path="/admin/bill/create" element={<CreateBill/>}/>
+    <Routes>
+      <Route element={
+        <AdminRoute>
+          <NavbarAdmin/>
+        </AdminRoute>
+      }>
+        <Route path="/admin">
+          <Route path='bill'>
+            <Route index element={<Bill/>}/>
+            <Route path="create" element={<CreateBill/>}/>
+          </Route>
         </Route>
+      </Route>
 
-      </Routes>
+    </Routes>
     </>
   );
 }
