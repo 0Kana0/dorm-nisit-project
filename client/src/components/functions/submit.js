@@ -15,3 +15,19 @@ export const listSubmit = async(authtoken, id) => {
 		}
 	});
 }
+
+export const readSubmit = async(authtoken, id) => { 
+	return await axios.get(process.env.REACT_APP_API + "/submit/user/" + id, {
+		headers: {
+			authtoken,
+		}
+	});
+}
+
+export const deleteSubmit = async(authtoken, id) => { 
+	return await axios.delete(process.env.REACT_APP_API + "/submit/user/" + id, {
+		headers: {
+			authtoken,
+		}
+	});
+}

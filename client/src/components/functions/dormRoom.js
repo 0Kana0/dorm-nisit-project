@@ -32,9 +32,24 @@ export const deleteDormRoomID = async(authtoken, id) => {
 	});
 }
 
-
 export const editDormRoomID = async(authtoken, id, value) => {
 	return await axios.put(process.env.REACT_APP_API + "/dormroom/edit/" + id, value, {
+		headers: {
+			authtoken,
+		}
+	});
+}
+
+export const editRoomState = async(authtoken, id) => {
+	return await axios.put(process.env.REACT_APP_API + "/dormroom/roomState/" + id, {
+		headers: {
+			authtoken,
+		}
+	});
+}
+
+export const editRoomStateTrue = async(authtoken, id) => {
+	return await axios.put(process.env.REACT_APP_API + "/dormroom/roomStateTrue/" + id, {
 		headers: {
 			authtoken,
 		}

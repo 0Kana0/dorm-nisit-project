@@ -2,7 +2,7 @@ const express = require('express')
 const router = express.Router()
 
 //controller
-const { listUsers, readUsers, updateUsers, removeUsers, updateUserBookTrue } = require('../controllers/user')
+const { listUsers, readUsers, updateUsers, removeUsers, updateUserBookTrue, updateUserBookFalse } = require('../controllers/user')
 
 // middleware
 const { auth, adminCheck } = require('../middleware/auth')
@@ -22,6 +22,7 @@ router.get('/users/:id',auth, readUsers)
 //Access   Private
 router.put('/users/:id',auth, updateUsers)
 router.put('/users/book/:id', updateUserBookTrue)
+router.put('/users/false/:id', updateUserBookFalse)
 
 //Endpoint http://localhost:5000/api/users/:id
 //Method   DELETE

@@ -38,6 +38,7 @@ const UserDormRoomList = () => {
 			)
 		}
 	}
+
 	return (
 		<div>
 			<NavbarUser />
@@ -50,7 +51,7 @@ const UserDormRoomList = () => {
 				</div><hr />
 				<div className="row px-5">
 					{dormroom.map((item)=>
-						<Link className="card col-sm-3 mt-5 nav-link" key={item.id} to={"/user/dorm/room/" + item._id}>
+						<Link className="card col-sm-3 mt-5 nav-link" key={item._id} to={"/user/dorm/room/" + item._id}>
 							<div className="card-body">
 								<h5 className="card-title">{item.dorm.name} ห้อง {item.roomID}</h5><hr/>
 								<p className="card-text">ชั้น {item.floor} ห้องที่ {item.room}</p>

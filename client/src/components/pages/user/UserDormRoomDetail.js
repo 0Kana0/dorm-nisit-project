@@ -3,7 +3,7 @@ import NavbarUser from '../../layouts/NavbarUser'
 import { Link, useParams, useNavigate } from "react-router-dom";
 
 // function
-import { listDormRoomID } from '../../functions/dormRoom'
+import { listDormRoomID, editRoomState } from '../../functions/dormRoom'
 import { listSubmit, createSubmit } from '../../functions/submit';
 import { readUsers, updateUserBookTrue } from '../../functions/user'
 
@@ -56,27 +56,48 @@ const UserDormRoomDetail = () => {
 				console.log(err)
 			})
 	}
+	const bookMember = submit.length
+	console.log(bookMember)
 
 	const onSubmit = () => {
-		createSubmit(user.token, {dormroom:param.id,user:user.id})
-			.then((res) => {
-				console.log(res.data)
-				alert('จองห้องสำเร็จ')
-				window.location.reload();
-			})
-			.catch((err) => {
-				console.log(err)
-			})
+		if (bookMember < room.member) {
+			if (bookMember == room.member-1) {
+				createSubmit(user.token, {dorm:dorm._id,dormroom:param.id,user:user.id})
+					.then((res) => {
+						editRoomState(user.token, room._id)
+						console.log(res.data)
+						alert('จองห้องสำเร็จ')
+						window.location.reload();
+					})
+					.catch((err) => {
+						console.log(err)
+					})
+			} else {
+				createSubmit(user.token, {dorm:dorm._id,dormroom:param.id,user:user.id})
+					.then((res) => {
+						console.log(res.data)
+						alert('จองห้องสำเร็จ')
+						window.location.reload();
+					})
+					.catch((err) => {
+						console.log(err)
+					})
+			}
+		} else if (bookMember => room.member) {
+			alert('ห้องเต็มเเล้ว')
+		}
 	}
 
 	const onChangeBookState = () => {
-		updateUserBookTrue(user.token, user.id)
+		if (bookMember < room.member) {
+			updateUserBookTrue(user.token, user.id)
 			.then((res) => {
 				console.log(res.data)
 			})
 			.catch((err) => {
 				console.log(err)
 			})
+		}
 	}
 
 	const userSubmit = submit.map((item)=>{
@@ -86,6 +107,7 @@ const UserDormRoomDetail = () => {
 				<td>{item.user.firstname} {item.user.lastname}</td>
 				<td>{item.user.faculty}</td>
 				<td>{item.user.major}</td>
+				<td>{item.user.classYear}</td>
 				<td><a target="_blank" href={"https://reg.src.ku.ac.th/res/table_std.php?id="+item.user.studentID+"&c_level=Bachelor"}><button className="btn btn-outline-info">ตารางเรียน</button></a></td>
 				<td></td>
 			</tr>
@@ -103,6 +125,7 @@ const UserDormRoomDetail = () => {
 								<th scope="col">ชื่อ</th>
 								<th scope="col">คณะ</th>
 								<th scope="col">สาขา</th>
+								<th scope="col">ปีที่</th>
 								<th scope="col">ตารางเรียน</th>
 								<th scope="col">ข้อมูลส่วนตัว</th>
 							</tr>
@@ -125,11 +148,11 @@ const UserDormRoomDetail = () => {
 	const roomState = (state) => {
 		if (state) {
 			return (
-				<div className="col-sm-8"><p className="text-muted mb-0">ว่าง</p></div>
+				<span>ว่าง</span>
 			)
 		} else {
 			return (
-				<div className="col-sm-8"><p className="text-muted mb-0">เต็ม</p></div>
+				<span>เต็ม</span>
 			)
 		}
 	}
@@ -137,11 +160,11 @@ const UserDormRoomDetail = () => {
 	const ShowButton = (state) => {
 		if (state) {
 			return (
-				<button disabled className="col-md-6 btn btn-outline-primary profile-button" onClick={()=>{onSubmit();onChangeBookState()}}>จองห้อง</button>
+				<Link className="col-md-6 btn btn-outline-success profile-button" to='/user/bookstate'>คุณได้ทำการจองห้องไปแล้ว กดเพื่อดูรายละเอียด</Link>
 			)
 		} else {
 			return (
-				<button className="col-md-6 btn btn-outline-primary profile-button" onClick={()=>{onSubmit();onChangeBookState()}}>จองห้อง</button>
+				<button className="col-md-6 btn btn-outline-primary profile-button" onClick={()=>{onSubmit();onChangeBookState()}}>ยืนยันการจองห้อง</button>
 			)
 		}
 	}
@@ -190,13 +213,14 @@ const UserDormRoomDetail = () => {
 								</div><hr />
 								<div className="row">
 									<div className="col-sm-4"><p className="mb-0">สถานะของห้อง</p></div>
-									{roomState(room.roomState)}
+									<div className="col-sm-8"><p className="text-muted mb-0">{roomState(room.roomState)}</p></div>
 								</div>
 							</div>
 						</div>
 					</div>
 				</div><br />
-				<h4>ข้อมูลการจองห้อง หมายเลข {room.roomID}</h4><hr /><br />
+				<h4>ข้อมูลการจองห้อง หมายเลข {room.roomID}</h4>
+				<h4>จำนวนผู้จองห้อง {bookMember} คน สถานะ {roomState(room.roomState)} </h4><hr /><br />
 				<ShowData />
 				<br /><hr />
 				<div className='d-flex justify-content-center'>

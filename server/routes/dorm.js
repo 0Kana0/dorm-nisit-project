@@ -10,7 +10,7 @@ const { auth, adminCheck } = require('../middleware/auth')
 //Endpoint http://localhost:5000/api/category
 router.get('/dorm', auth, listDorm)
 router.post('/dorm', auth, adminCheck, createDorm)
-router.get('/dorm/:id', auth, adminCheck, readDorm)
+router.get('/dorm/:id', auth, readDorm)
 router.put('/dorm/:id', auth, adminCheck, updateDorm)
 router.delete('/dorm/:id', auth, adminCheck, removeDorm)
 

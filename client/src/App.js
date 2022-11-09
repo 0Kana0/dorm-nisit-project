@@ -5,6 +5,9 @@ import Register from "./components/pages/auth/Register"
 import Login from "./components/pages/auth/Login"
 import Home from './components/pages/Home'
 
+//page
+import Utilities from './components/pages/Utilities'
+
 // page admin
 import AdminHome from './components/pages/admin/AdminHome'
 import AdminManage from './components/pages/admin/AdminManage'
@@ -24,6 +27,7 @@ import UserProfileEdit from './components/pages/user/UserProfileEdit'
 import UserDormList from './components/pages/user/UserDormList'
 import UserDormRoomList from './components/pages/user/UserDormRoomList'
 import UserDormRoomDetail from './components/pages/user/UserDormRoomDetail'
+import UserBookedState from './components/pages/user/UserBookedState'
 
 // functions
 import { currentUser } from './components/functions/auth'
@@ -56,6 +60,7 @@ function App() {
       })
   }
   return (
+    <>
     <Routes>
       <Route path="/" element={<Login />} />
       <Route path="/register" element={<Register />} />
@@ -110,6 +115,11 @@ function App() {
           <AdminUpdateDormRoom/>
         </AdminRoute>
       } />
+      <Route path="/admin/utilities" element={
+        <AdminRoute>
+          <Utilities/>
+        </AdminRoute>
+      } />
 
       <Route path="/user/index" element={
         <UserRoute>
@@ -141,7 +151,13 @@ function App() {
           <UserProfileEdit />
         </UserRoute>
       } />
+      <Route path="/user/bookstate" element={
+        <UserRoute>
+          <UserBookedState />
+        </UserRoute>
+      } />
     </Routes>
+    </>
   );
 }
 

@@ -3,7 +3,8 @@ import NavbarUser from '../../layouts/NavbarUser'
 import { Link } from "react-router-dom";
 
 // function
-import { listDorm } from '../../functions/dorm'
+import { readUsers } from '../../functions/user'
+import { readDorm, listDorm } from '../../functions/dorm'
 
 // redux
 import { useSelector } from 'react-redux';
@@ -11,9 +12,11 @@ import { useSelector } from 'react-redux';
 const UserDormList = () => {
 	const { user } = useSelector((state) => ({ ...state }))
 	const [dorm, setDorm] = useState([])
+	const [userdata, setUserdata] = useState([])
 
 	useEffect(() => {
     loadData(user.token)
+		loadDataUser(user.token, user.id)
   }, [])
 
   const loadData = (authtoken) => {
@@ -26,6 +29,23 @@ const UserDormList = () => {
       })
   }
 
+	const loadDataUser = (authtoken, id) => {
+		readUsers(authtoken, id)
+			.then((res) => {
+				setUserdata(res.data)
+			})
+			.catch((err) => {
+				console.log(err)
+			})
+	}	
+
+	const checkGender = (gender) => {
+		if (userdata.gender != gender) {
+			alert('ไม่มีสิทธิเข้าดู')
+			window.location.reload();
+		}
+	}
+
 	return (
 		<div>
 			<NavbarUser />
@@ -37,7 +57,7 @@ const UserDormList = () => {
 				</div><hr />
 				<div className="row px-5">
 					{dorm.map((item)=>
-						<Link className="card col-sm-4 mt-5 nav-link" key={item._id} to={"/user/dorm/" + item._id}>
+						<Link className="card col-sm-4 mt-5 nav-link" key={item._id} to={"/user/dorm/" + item._id} onClick={()=>checkGender(item.dormType)}>
 							<img height='250px' src={item.dormImg} className="card-img-top" alt="..." />
 							<div className="card-body">
 								<h5 className="card-title">{item.name}</h5><hr/>
