@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { Link } from 'react-router-dom'
 import { Table, Container, Button } from 'react-bootstrap'
 import { ImCheckmark, ImCross } from 'react-icons/im'
 
@@ -81,7 +82,7 @@ const Utilities = () => {
     <Container className="py-5">
       <div className="d-flex justify-content-between">
         <h3>สาธารณูปโภค</h3>
-        <Button variant="outline-success">เพิ่มบิลค่าไฟ</Button>
+        <Link className="btn btn-outline-success" to="create">เพิ่มบิลค่าไฟ</Link>
       </div>
       <hr></hr>
       <Table responsive hover >
