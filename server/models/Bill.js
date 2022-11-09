@@ -2,13 +2,9 @@ const mongoose = require('mongoose')
 const { ObjectId } = mongoose.Schema
 
 const BillSchema = new mongoose.Schema({
-  user:{
-    type:ObjectId,
-    ref:"user"
-  },
   room:{
     type:ObjectId,
-    ref:"dorm",
+    ref:"dormroom",
   },
   issueDate:{
     type:Date
@@ -21,9 +17,6 @@ const BillSchema = new mongoose.Schema({
   },
   fine:{
     type:Number
-  },
-  paid:{
-    type:Boolean
   },
 },{timestamps: true});
 
