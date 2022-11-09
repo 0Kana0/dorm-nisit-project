@@ -179,7 +179,6 @@ const UserDormRoomDetail = () => {
 					}
 				</div>
 			</div>
-			<ToastContainer/>
 		</div>
 	)
 }
