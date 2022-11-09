@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react'
 import NavbarUser from '../../layouts/NavbarUser'
 import { Link, useParams, useNavigate } from "react-router-dom";
+import { Button } from 'react-bootstrap'
 
 // function
 import { listDormRoomID } from '../../functions/dormRoom'
-import { listSubmit } from '../../functions/submit';
+import { createSubmit, listSubmit } from '../../functions/submit';
 
 // redux
 import { useSelector } from 'react-redux';
@@ -104,7 +105,15 @@ const UserDormRoomDetail = () => {
 		e.preventDefault()
 		console.log(user.id)
 		console.log(param.id)
+		createSubmit(user.token,{
+			dormroom:param.id,
+			user:user.id
+		}).then(()=>{
+			alert('จองห้องเสร็จสิ้นแล้ว')
+		})
 	}
+
+	console.log(submit)
 
 	return (
 		<div>
@@ -160,7 +169,11 @@ const UserDormRoomDetail = () => {
 				<ShowData />
 				<br /><hr />
 				<div className='d-flex justify-content-center'>
-					<button className="col-md-6 btn btn-outline-primary profile-button" onClick={onSubmit}>จองห้อง</button>
+					{
+						submit.find((item)=>item.user.id === user.id) ?
+							<Button className="profile-button" variant="outline-primary" onClick={onSubmit}>จองห้อง</Button> :
+							<Button className="profile-button" variant="outline-success" disabled>จองแล้ว</Button>
+					}
 				</div>
 			</div>
 		</div>
