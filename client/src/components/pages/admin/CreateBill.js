@@ -60,7 +60,7 @@ const AdminCreateDorm = () => {
       .then((res) => {
         console.log(res)
         alert('เพิ่มบิลค่าไฟสำเร็จ')
-        navigate('/admin/dormlist')
+        navigate('/admin/bill')
       })
       .catch((err) => {
         console.log(err)
@@ -68,13 +68,11 @@ const AdminCreateDorm = () => {
   }
 
   return (
-    <div>
-      <NavbarAdmin />
       <div className='container py-5'>
         <div className="row">
           <div className="d-flex justify-content-between align-items-center experience">
             <h3>เพิ่มบิลค่าไฟ</h3>
-            <Link className="btn btn-outline-secondary" to='/admin/dormlist'>ย้อนกลับ</Link>
+            <Link className="btn btn-outline-secondary" to='/admin/bill'>ย้อนกลับ</Link>
           </div><br />
         </div><hr />
         <form onSubmit={handleSubmit}>
@@ -110,7 +108,6 @@ const AdminCreateDorm = () => {
           </div><br />
         </form><hr />
       </div>
-    </div>
   )
 }
 
