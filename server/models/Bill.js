@@ -1,15 +1,16 @@
 const mongoose = require('mongoose')
 const { ObjectId } = mongoose.Schema
 
-const UtilitySchema = new mongoose.Schema({
+const BillSchema = new mongoose.Schema({
+  user:{
+    type:ObjectId,
+    ref:"user"
+  },
   room:{
     type:ObjectId,
     ref:"dorm",
   },
   issueDate:{
-    type:Date
-  },
-  dueDate: {
     type:Date
   },
   water:{
@@ -26,4 +27,4 @@ const UtilitySchema = new mongoose.Schema({
   },
 },{timestamps: true});
 
-module.exports = Utility = mongoose.model('utility', UtilitySchema)
+module.exports = Bill = mongoose.model('bill', BillSchema)
