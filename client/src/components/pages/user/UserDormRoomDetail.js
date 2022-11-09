@@ -10,6 +10,9 @@ import { createSubmit, listSubmit } from '../../functions/submit';
 // redux
 import { useSelector } from 'react-redux';
 
+// React toastify
+import { ToastContainer, toast } from 'react-toastify'
+
 const UserDormRoomDetail = () => {
 	const navigate = useNavigate()
 	const { user } = useSelector((state) => ({ ...state }))
@@ -109,11 +112,11 @@ const UserDormRoomDetail = () => {
 			dormroom:param.id,
 			user:user.id
 		}).then(()=>{
-			alert('จองห้องเสร็จสิ้นแล้ว')
+			loadDataSubmit(user.token, param.id)
+			toast('จองห้องเสร็จสิ้นแล้ว')
 		})
 	}
 
-	console.log(submit)
 
 	return (
 		<div>
@@ -170,12 +173,13 @@ const UserDormRoomDetail = () => {
 				<br /><hr />
 				<div className='d-flex justify-content-center'>
 					{
-						submit.find((item)=>item.user.id === user.id) ?
+						submit.find((item)=>item.user._id === user.id) === undefined ?
 							<Button className="profile-button" variant="outline-primary" onClick={onSubmit}>จองห้อง</Button> :
-							<Button className="profile-button" variant="outline-success" disabled>จองแล้ว</Button>
+							<Button className="profile-button" variant="outline-success" onClick={()=>toast('มีรายชื่ออยู่ในระบบจองแล้ว')}>จองแล้ว</Button>
 					}
 				</div>
 			</div>
+			<ToastContainer/>
 		</div>
 	)
 }
