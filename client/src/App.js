@@ -39,6 +39,7 @@ import AdminRoute from './components/routes/AdminRoute'
 
 // Navbar
 import NavbarAdmin from './components/layouts/NavbarAdmin'
+import { ToastContainer } from 'react-toastify'
 
 function App() {
   const dispatch = useDispatch()
@@ -166,6 +167,7 @@ function App() {
       </Route>
 
     </Routes>
+    <ToastContainer/>
     </>
   );
 }
