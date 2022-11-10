@@ -88,8 +88,6 @@ const UserDormRoomDetail = () => {
 						console.log(err)
 					})
 			}
-		} else if (bookMember => room.member) {
-			toast('มีรายชื่ออยู่ในระบบจองแล้ว')
 		}
 	}
 
