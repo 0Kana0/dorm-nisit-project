@@ -9,6 +9,7 @@ import { createStore } from 'redux';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import rootReducer from './components/reducers/index';
 import ScrollToTop from "./helpers/ScrollToTop"
+import './style.css';
 
 const store = createStore(rootReducer,composeWithDevTools());
 
