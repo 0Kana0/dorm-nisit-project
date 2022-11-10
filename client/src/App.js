@@ -21,6 +21,7 @@ import AdminDormRoomList from './components/pages/admin/AdminDormRoomList'
 import AdminDormRoomDetail from './components/pages/admin/AdminDormRoomDetail'
 import AdminUpdateDormRoom from './components/pages/admin/AdminUpdateDormRoom'
 import DormBill from './components/pages/admin/DormBill'
+import DormRoomBill from './components/pages/admin/DormRoomBill'
 
 // page user
 import UserHome from './components/pages/user/UserHome'
@@ -128,6 +129,16 @@ function App() {
               <DormBill />
             </AdminRoute>
           } />
+          <Route path="/admin/bill/:dormId" element={
+            <AdminRoute>
+              <DormRoomBill />
+            </AdminRoute>
+        } />
+          <Route path='/admin/bill/:dormId/:roomId' element={
+            <AdminRoute>
+              <Bill />
+            </AdminRoute> 
+          }/>
         </Route>
         
         <Route path='/admin/bill/:dormId/:roomId'/>
@@ -136,6 +147,7 @@ function App() {
             <CreateBill />
           </AdminRoute>
         } />
+        
 
 
         <Route path="/user/index" element={
