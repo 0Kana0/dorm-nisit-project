@@ -6,6 +6,9 @@ import { login } from '../../functions/auth'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link, useNavigate } from 'react-router-dom'
 
+// React-toastify
+import { ToastContainer, toast } from 'react-toastify'
+
 const Login = () => {
   const navigate = useNavigate()
   const dispatch = useDispatch()
@@ -43,7 +46,7 @@ const Login = () => {
     login(value)
       .then(res => {
         console.log(res.data)
-        alert('เข้าสู่ระบบสำเร็จ')
+        toast('เข้าสู่ระบบสำเร็จ')
         dispatch({
           type: 'LOGIN',
           payload: {
@@ -57,7 +60,7 @@ const Login = () => {
         roleBaseRedirect(res.data.payload.user.role)
       }).catch(err => {
         console.log(err.response.data)
-        alert(err.response.data)
+        toast(err.response.data)
       })
 
   }

@@ -1,14 +1,19 @@
 import React, { useState, useEffect } from 'react'
 import NavbarUser from '../../layouts/NavbarUser'
 import { Link, useParams, useNavigate } from "react-router-dom";
+import { Button } from 'react-bootstrap'
 
 // function
+
 import { listDormRoomID, editRoomState } from '../../functions/dormRoom'
 import { listSubmit, createSubmit } from '../../functions/submit';
 import { readUsers, updateUserBookTrue } from '../../functions/user'
 
 // redux
 import { useSelector } from 'react-redux';
+
+// React toastify
+import { ToastContainer, toast } from 'react-toastify'
 
 const UserDormRoomDetail = () => {
 	const navigate = useNavigate()
@@ -84,7 +89,7 @@ const UserDormRoomDetail = () => {
 					})
 			}
 		} else if (bookMember => room.member) {
-			alert('ห้องเต็มเเล้ว')
+			toast('มีรายชื่ออยู่ในระบบจองแล้ว')
 		}
 	}
 
@@ -156,6 +161,7 @@ const UserDormRoomDetail = () => {
 			)
 		}
 	}
+
 
 	const ShowButton = (state) => {
 		if (state) {

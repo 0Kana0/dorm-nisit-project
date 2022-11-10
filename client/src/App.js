@@ -7,6 +7,7 @@ import Home from './components/pages/Home'
 
 //page
 import Bill from './components/pages/admin/Bill'
+import CreateBill from './components/pages/admin/CreateBill'
 
 // page admin
 import AdminHome from './components/pages/admin/AdminHome'
@@ -40,6 +41,7 @@ import AdminRoute from './components/routes/AdminRoute'
 
 // Navbar
 import NavbarAdmin from './components/layouts/NavbarAdmin'
+import { ToastContainer } from 'react-toastify'
 
 function App() {
   const dispatch = useDispatch()
@@ -169,8 +171,24 @@ function App() {
         }>
           <Route path="/admin/bill" element={<Bill/>}/>
         </Route>
-
       </Routes>
+
+    <Routes>
+      <Route element={
+        <AdminRoute>
+          <NavbarAdmin/>
+        </AdminRoute>
+      }>
+        <Route path="/admin">
+          <Route path='bill'>
+            <Route index element={<Bill/>}/>
+            <Route path="create" element={<CreateBill/>}/>
+          </Route>
+        </Route>
+      </Route>
+
+    </Routes>
+    <ToastContainer/>
     </>
   );
 }
