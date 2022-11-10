@@ -17,6 +17,7 @@ exports.readUsers = async(req,res)=>{
 	try{
 	 // Code
    const id = req.params.id
+	 console.log(id)
    const user = await User.findOne({_id:id})
 	 .select('-password')
 	 .exec()
@@ -47,5 +48,27 @@ exports.removeUsers = async(req,res)=>{
 	}catch(err){
 	  console.log(err)
 	  res.status(500).send('Server Error!')
+	}
+}
+
+exports.updateUserBookTrue = async(req,res)=>{
+	try{
+		const id = req.params.id
+		const user = await User.findByIdAndUpdate({_id:id},{bookedState:true})
+	 	res.send(user)
+	}catch(err){
+	  console.log(err)
+	  res.status(500).send('updateUsers Error!')
+	}
+}
+
+exports.updateUserBookFalse = async(req,res)=>{
+	try{
+		const id = req.params.id
+		const user = await User.findByIdAndUpdate({_id:id},{bookedState:false})
+	 	res.send(user)
+	}catch(err){
+	  console.log(err)
+	  res.status(500).send('updateUsers Error!')
 	}
 }

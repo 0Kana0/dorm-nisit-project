@@ -25,7 +25,7 @@ const NavbarAdmin = () => {
               <Link className="nav-link" to='/admin/dormlist'>จองห้องพัก</Link>
             </li>
             <li className="nav-item">
-              <Link className="nav-link" to="/admin/utilities">ค่าไฟฟ้า</Link>
+              <Link className="nav-link" to="/admin/bill">ค่าไฟฟ้า</Link>
             </li>
             <li className="nav-item">
               <Link className="nav-link">เเจ้งซ่อม</Link>

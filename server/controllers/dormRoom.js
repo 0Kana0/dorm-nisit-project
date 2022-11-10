@@ -59,6 +59,26 @@ exports.editDormRoomID = async(req,res)=>{
   }
 }
 
+exports.editRoomState = async(req,res)=>{
+	try {
+    const id = req.params.id
+    console.log(id)
+    const dormroom = await DormRoom.findOneAndUpdate({_id:id},{roomState:false})
+    res.send(dormroom)
+  } catch (err) {
+    console.log(err)
+    res.status(500).send('listDormRoom Error!')
+  }
+}
 
-
-
+exports.editRoomStateTrue = async(req,res)=>{
+	try {
+    const id = req.params.id
+    console.log(id)
+    const dormroom = await DormRoom.findOneAndUpdate({_id:id},{roomState:true})
+    res.send(dormroom)
+  } catch (err) {
+    console.log(err)
+    res.status(500).send('listDormRoom Error!')
+  }
+}

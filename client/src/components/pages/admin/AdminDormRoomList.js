@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import NavbarAdmin from '../../layouts/NavbarAdmin'
-import { Link, useParams } from "react-router-dom";
+import { Link, useParams, useNavigate } from "react-router-dom";
 
 // function
 import { listDormRoom, deleteDormRoomID } from '../../functions/dormRoom'
@@ -9,6 +9,7 @@ import { listDormRoom, deleteDormRoomID } from '../../functions/dormRoom'
 import { useSelector } from 'react-redux';
 
 const AdminDormRoomList = () => {
+	const navigate = useNavigate()
 	const { user } = useSelector((state) => ({ ...state }))
   const param = useParams()
 	const [dormroom, setDormroom] = useState([])
@@ -66,7 +67,7 @@ const AdminDormRoomList = () => {
 				</div><hr />
 				<div className="row px-5">
 					{dormroom.map((item)=>
-						<Link className="card col-sm-3 mt-5 nav-link" key={item._id} to={"/admin/dorm/room/" + item._id}>
+						<div style={{ cursor: "pointer" }} className="card col-sm-3 mt-5 nav-link" key={item._id} onClick={() => navigate(`/admin/dorm/room/${item._id}`)}>
 							<div className="card-body">
 								<h5 className="card-title">{item.dorm.name} ห้อง {item.roomID}</h5><hr/>
 								<p className="card-text">ชั้น {item.floor} ห้องที่ {item.room}</p>
@@ -75,11 +76,11 @@ const AdminDormRoomList = () => {
 								<p className="card-text">ราคา {item.price} บาท</p>
 								{roomState(item.roomState)}
 								<div className="d-flex justify-content-between">
-									<Link className="btn btn-outline-warning" to={'/admin/dorm/update-room/' + item._id}>เเก้ไขข้อมูลห้องพัก</Link>
-									<button className="btn btn-outline-danger" onClick={(e)=>{handleRemove(item._id);e.stopPropagation();}}>ลบห้องพัก</button>
+									<button className="btn btn-outline-warning" onClick={(e)=>{e.stopPropagation();navigate(`/admin/dorm/update-room/${item._id}`);}}>เเก้ไขข้อมูลห้องพัก</button>
+									<button className="btn btn-outline-danger" onClick={(e)=>{e.stopPropagation();handleRemove(item._id);}}>ลบห้องพัก</button>
 								</div>
 							</div>
-						</Link>
+						</div>
 					)}
 				</div>
 			</div>
