@@ -28,7 +28,6 @@ const AdminManage = () => {
   }
   return (
     <div>
-      <NavbarAdmin/>
       <div className="container mt-5 mb-5 col-md-10">
         <h3>AdminManage</h3><hr/>
         <table className="table">

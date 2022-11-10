@@ -27,7 +27,6 @@ const AdminDashboard = () => {
   }
   return (
     <div>
-      <NavbarAdmin />
       <section>
         <div className='container py-5'>
           <div className="row">

@@ -78,7 +78,7 @@ const AdminDormRoomDetail = () => {
 		if (submit.length > 0) {
 			return (
 				<div>
-					<table class="table">
+					<table className="table">
 						<thead>
 							<tr>
 								<th scope="col">รหัสนิสิต</th>
@@ -119,7 +119,6 @@ const AdminDormRoomDetail = () => {
 
 	return (
 		<div>
-			<NavbarAdmin />
 			<div className='container py-5'>
 				<div className="row">
 					<div className="d-flex justify-content-between align-items-center experience">
