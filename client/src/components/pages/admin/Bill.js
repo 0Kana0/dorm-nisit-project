@@ -1,62 +1,51 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { Table, Container, Button } from 'react-bootstrap'
 import { ImCheckmark, ImCross } from 'react-icons/im'
 import NavbarAdmin from '../../layouts/NavbarAdmin'
+import { listBills } from '../../functions/bill'
+import { useSelector } from 'react-redux'
 
 const Utilities = () => {
-  // Data Mockup จำลองข้อมูลก่อน ค่อยมาเปลี่ยนเป็น Fetch จาก Backend ทีหลัง
-  const [utils, setUtils] = useState([
-    { 
-      id:1,
-      room:'2208',
-      issueDate:'2022-9-31',
-      dueDate:'2022-10-31',
-      water:60,
-      electric:280,
-      fine:0,
-      paid:false,
-    },
-    { 
-      id:2,
-      room:'2316',
-      issueDate:'2022-9-31',
-      dueDate:'2022-10-31',
-      water:80,
-      electric:300,
-      fine:0,
-      paid:false,
-    },
-  ])
+  const { user } = useSelector((state) => ({ ...state }))
+
+  const [bills,setBills] = useState([])
+
+  useEffect(()=>{
+    listBills(user.token).then((res)=>{
+      setBills(res.data)
+    }).catch((err)=>{
+      console.log(err)
+    })
+  },[])
 
   const options = {
-    timeZone: 'Asia/Bangkok',
     day:'numeric',
     month:'long',
-    year:'numeric',
+    year:'numeric'
   }
 
-  const paidUtils = (currentItem,paid) => {
-    const mappedUtils = utils.map((item)=>{
-      if (item === currentItem) {
-        item.paid = paid
-        return item
-      }
-      return item
-    })
-    setUtils(mappedUtils)
+  const payBill = (currentItem,paid) => {
+
   }
 
-  const utilsTable = utils.map((item,index)=>{
+  const billsTable = bills.map((item,index)=>{
+    let fine = 0
+    let dueDate = new Date(item.issueDate)
+    dueDate.setMonth(dueDate.getMonth() + 1)
+    let currentDate = Date.now()
+    if (currentDate > dueDate) {
+      fine += (currentDate - dueDate) * 20
+    }
     return (
       <tr key={index}>
         <td>{index + 1}</td>
-        <td>{item.room}</td>
+        <td>{item.room.roomID}</td>
         <td>{new Date(item.issueDate).toLocaleDateString('th-TH',options)}</td>
         <td>{item.water}</td>
         <td>{item.electric}</td>
-        <td>{item.fine}</td>
-        <td>{item.water + item.electric + item.fine}</td>
+        <td>{fine}</td>
+        <td>{item.water + item.electric + fine}</td>
         <td>{new Date(item.dueDate).toLocaleDateString('th-TH',options)}</td>
         <td>{item.paid ? 
           <>
@@ -71,8 +60,8 @@ const Utilities = () => {
         </td>
         <td className='d-grid'>
           {item.paid ?
-            <Button variant="outline-danger" onClick={()=>paidUtils(item,!item.paid)}>ยกเลิก</Button> :
-            <Button variant="outline-success" onClick={()=>paidUtils(item,!item.paid)}>ชำระ</Button>
+            <Button variant="outline-danger" onClick={()=>payBill(item,!item.paid)}>ยกเลิก</Button> :
+            <Button variant="outline-success" onClick={()=>payBill(item,!item.paid)}>ชำระ</Button>
           }
         </td>
       </tr>
@@ -104,7 +93,7 @@ const Utilities = () => {
             </tr>
           </thead>
           <tbody className='table-group-divider'>
-            {utilsTable}
+            {billsTable}
           </tbody>
         </Table>
       </div>
