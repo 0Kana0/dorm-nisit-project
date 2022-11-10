@@ -6,7 +6,7 @@ import Login from "./components/pages/auth/Login"
 import Home from './components/pages/Home'
 
 //page
-import Utilities from './components/pages/Utilities'
+import Bill from './components/pages/admin/Bill'
 
 // page admin
 import AdminHome from './components/pages/admin/AdminHome'
@@ -19,6 +19,7 @@ import AdminDormList from './components/pages/admin/AdminDormList'
 import AdminDormRoomList from './components/pages/admin/AdminDormRoomList'
 import AdminDormRoomDetail from './components/pages/admin/AdminDormRoomDetail'
 import AdminUpdateDormRoom from './components/pages/admin/AdminUpdateDormRoom'
+import Utilities from './components/pages/admin/Bill'
 
 // page user
 import UserHome from './components/pages/user/UserHome'
@@ -36,6 +37,9 @@ import { useDispatch } from 'react-redux'
 // Routes
 import UserRoute from './components/routes/UserRoute'
 import AdminRoute from './components/routes/AdminRoute'
+
+// Navbar
+import NavbarAdmin from './components/layouts/NavbarAdmin'
 
 function App() {
   const dispatch = useDispatch()
@@ -117,7 +121,7 @@ function App() {
       } />
       <Route path="/admin/utilities" element={
         <AdminRoute>
-          <Utilities/>
+          <Utilities />
         </AdminRoute>
       } />
 
@@ -157,6 +161,16 @@ function App() {
         </UserRoute>
       } />
     </Routes>
+      <Routes>
+        <Route element={
+          <AdminRoute>
+            <NavbarAdmin/>
+          </AdminRoute>
+        }>
+          <Route path="/admin/bill" element={<Bill/>}/>
+        </Route>
+
+      </Routes>
     </>
   );
 }
