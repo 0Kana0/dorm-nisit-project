@@ -1,10 +1,8 @@
 import React, { useState, useEffect } from 'react'
 import NavbarUser from '../../layouts/NavbarUser'
 import { Link, useParams, useNavigate } from "react-router-dom";
-import { Button } from 'react-bootstrap'
 
 // function
-
 import { listDormRoomID, editRoomState } from '../../functions/dormRoom'
 import { listSubmit, createSubmit } from '../../functions/submit';
 import { readUsers, updateUserBookTrue } from '../../functions/user'
@@ -103,7 +101,7 @@ const UserDormRoomDetail = () => {
 		}
 	}
 
-	const userSubmit = submit.map((item)=>{
+	const userSubmit = submit.map((item,index)=>{
 		return (
 			<tr key={item._id}>
 				<th scope="col">{item.user.studentID}</th>
@@ -112,7 +110,8 @@ const UserDormRoomDetail = () => {
 				<td>{item.user.major}</td>
 				<td>{item.user.classYear}</td>
 				<td><a target="_blank" href={"https://reg.src.ku.ac.th/res/table_std.php?id="+item.user.studentID+"&c_level=Bachelor"}><button className="btn btn-outline-info">ตารางเรียน</button></a></td>
-				<td></td>
+				<td><Link className="btn btn-outline-warning" to={'/user/dorm/room/profile/' + item.user._id}>ข้อมูลส่วนตัว</Link>	
+				</td>
 			</tr>
 		)
 	})

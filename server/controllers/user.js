@@ -17,6 +17,7 @@ exports.readUsers = async(req,res)=>{
 	try{
 	 // Code
    const id = req.params.id
+	 console.log(id)
    const user = await User.findOne({_id:id})
 	 .select('-password')
 	 .exec()

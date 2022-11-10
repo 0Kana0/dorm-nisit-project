@@ -30,6 +30,7 @@ import UserDormList from './components/pages/user/UserDormList'
 import UserDormRoomList from './components/pages/user/UserDormRoomList'
 import UserDormRoomDetail from './components/pages/user/UserDormRoomDetail'
 import UserBookedState from './components/pages/user/UserBookedState'
+import UserDormRoomDetailProfile from './components/pages/user/UserDormRoomDetailProfile'
 
 // functions
 import { currentUser } from './components/functions/auth'
@@ -145,6 +146,11 @@ function App() {
       <Route path="/user/dorm/room/:id" element={
         <UserRoute>
           <UserDormRoomDetail />
+        </UserRoute>
+      } />
+      <Route path="/user/dorm/room/profile/:id" element={
+        <UserRoute>
+          <UserDormRoomDetailProfile />
         </UserRoute>
       } />
       <Route path="/user/dashboard" element={

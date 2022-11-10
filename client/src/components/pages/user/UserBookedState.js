@@ -71,7 +71,7 @@ const UserBookedState = () => {
   const showBook = (state) => {
     if (state) {
       return (
-        <div className='container py-5'>
+        <div className='container py-2'>
           <h4>ข้อมูลการจองห้อง</h4><hr />
           <div className="card mt-5 nav-link" key={book._id}>
               <img height='250px' src={dormroom.images} className="card-img-top" alt="..." />
