@@ -11,5 +11,5 @@ const { auth, adminCheck } = require('../middleware/auth')
 // Endpoint
 router.get('/bill', auth, listBills)
 
-modules.exports = router
+module.exports = router
 
