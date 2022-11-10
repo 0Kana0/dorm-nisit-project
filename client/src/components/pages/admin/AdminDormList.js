@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import NavbarAdmin from '../../layouts/NavbarAdmin'
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 // function
 import { listDorm, deleteDorm } from '../../functions/dorm'
@@ -9,6 +9,7 @@ import { listDorm, deleteDorm } from '../../functions/dorm'
 import { useSelector } from 'react-redux';
 
 const AdminDormList = () => {
+	const navigate = useNavigate()
 	const { user } = useSelector((state) => ({ ...state }))
 	const [dorm, setDorm] = useState([])
 
@@ -50,7 +51,7 @@ const AdminDormList = () => {
 				</div><hr />
 				<div className="row px-5">
 					{dorm.map((item)=>
-						<Link className="card col-sm-4 mt-5 nav-link" key={item._id} to={"/admin/dorm/" + item._id}>
+						<div style={{ cursor: "pointer" }} className="card col-sm-4 mt-5 nav-link" key={item._id} onClick={() => navigate(`/admin/dorm/${item._id}`)}>
 							<img height='250px' src={item.dormImg} className="card-img-top" alt="..." />
 							<div className="card-body">
 								<h5 className="card-title">{item.name}</h5><hr/>
@@ -58,11 +59,11 @@ const AdminDormList = () => {
 								<p className="card-text">จำนวนชั้นทั้งหมด {item.dormFloor} ชั้น</p>
 								<p className="card-text">ชั้นละ {item.dormRoom} ห้อง</p>
 								<div className="d-flex justify-content-between">
-									<Link className="btn btn-outline-warning" to={'/admin/update-dorm/' + item._id}>เเก้ไขข้อมูลหอพัก</Link>
-									<button className="btn btn-outline-danger" onClick={(e)=>{handleRemove(item._id);e.stopPropagation();}}>ลบหอพัก</button>
+									<button className="btn btn-outline-warning" onClick={(e) => {e.stopPropagation();navigate(`/admin/update-dorm/${item._id}`);}}>เเก้ไขข้อมูลหอพัก</button>
+									<button className="btn btn-outline-danger" onClick={(e)=>{e.stopPropagation();handleRemove(item._id);}}>ลบหอพัก</button>
 								</div>
 							</div>
-						</Link>
+						</div>
 					)}
 				</div>
 			</div>

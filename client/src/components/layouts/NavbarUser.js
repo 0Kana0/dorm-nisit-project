@@ -24,7 +24,7 @@ const NavbarUser = () => {
               <Link className="nav-link" to='/user/dormlist'>จองห้องพัก</Link>
             </li>
             <li className="nav-item">
-              <Link className="nav-link" to="/user/bill">ค่าไฟฟ้า</Link>
+              <Link className="nav-link">ค่าไฟฟ้า</Link>
             </li>
             <li className="nav-item">
               <Link className="nav-link">เเจ้งซ่อม</Link>

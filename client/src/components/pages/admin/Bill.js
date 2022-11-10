@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { Table, Container, Button } from 'react-bootstrap'
 import { ImCheckmark, ImCross } from 'react-icons/im'
+import NavbarAdmin from '../../layouts/NavbarAdmin'
 
 const Utilities = () => {
   // Data Mockup จำลองข้อมูลก่อน ค่อยมาเปลี่ยนเป็น Fetch จาก Backend ทีหลัง
@@ -79,32 +80,35 @@ const Utilities = () => {
   })
 
   return (
-    <Container className="py-5">
-      <div className="d-flex justify-content-between">
-        <h3>สาธารณูปโภค</h3>
-        <Link className="btn btn-outline-success" to="create">เพิ่มบิลค่าไฟ</Link>
+    <div>
+      <NavbarAdmin />
+      <div className='container py-5'>
+        <div className="d-flex justify-content-between">
+          <h3>สาธารณูปโภค</h3>
+          <Link className="btn btn-outline-success" to="/admin/create-bill">เพิ่มบิลค่าไฟ</Link>
+        </div>
+        <hr></hr>
+        <Table responsive hover >
+          <thead>
+            <tr>
+              <th>ลำดับ</th>
+              <th>ห้อง</th>
+              <th>วันที่ออกบิล</th>
+              <th>ค่าน้ำ</th>
+              <th>ค่าไฟ</th>
+              <th>ค่าปรับ</th>
+              <th>รวม</th>
+              <th>หมดเขตวันที่</th>
+              <th>สถานะ</th>
+              <th>รายละเอียด</th>
+            </tr>
+          </thead>
+          <tbody className='table-group-divider'>
+            {utilsTable}
+          </tbody>
+        </Table>
       </div>
-      <hr></hr>
-      <Table responsive hover >
-        <thead>
-          <tr>
-            <th>ลำดับ</th>
-            <th>ห้อง</th>
-            <th>วันที่ออกบิล</th>
-            <th>ค่าน้ำ</th>
-            <th>ค่าไฟ</th>
-            <th>ค่าปรับ</th>
-            <th>รวม</th>
-            <th>หมดเขตวันที่</th>
-            <th>สถานะ</th>
-            <th>รายละเอียด</th>
-          </tr>
-        </thead>
-        <tbody className='table-group-divider'>
-          {utilsTable}
-        </tbody>
-      </Table>
-    </Container>
+    </div>
   )
 }
 

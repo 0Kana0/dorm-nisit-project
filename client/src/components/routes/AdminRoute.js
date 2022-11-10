@@ -5,7 +5,7 @@ import { currentAdmin } from '../functions/auth'
 
 const AdminRoute = ({children}) => {
 	const { user } = useSelector((state)=>({...state}))
-  const [ ok, setOk ] = useState(true)
+  const [ ok, setOk ] = useState(false)
 
   useEffect(()=>{
     if(user && user.token){

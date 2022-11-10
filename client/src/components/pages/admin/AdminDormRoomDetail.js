@@ -14,7 +14,7 @@ const AdminDormRoomDetail = () => {
 	const param = useParams()
 	const [dorm, setDorm] = useState([])
 	const [room, setRoom] = useState([])
-	const [residents,setResidents] = useState([])
+	const [submit, setSubmit] = useState([])
 
 	useEffect(() => {
 		loadData(user.token, param.id)
@@ -33,7 +33,7 @@ const AdminDormRoomDetail = () => {
 	console.log(room)
 
 	const ShowData = () => {
-		if (residents.length > 0) {
+		if (submit.length > 0) {
 			return (
 				<div>
 					<table class="table">

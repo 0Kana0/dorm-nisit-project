@@ -68,6 +68,8 @@ const AdminCreateDorm = () => {
   }
 
   return (
+    <div>
+      <NavbarAdmin />
       <div className='container py-5'>
         <div className="row">
           <div className="d-flex justify-content-between align-items-center experience">
@@ -108,6 +110,7 @@ const AdminCreateDorm = () => {
           </div><br />
         </form><hr />
       </div>
+    </div>
   )
 }
 
