@@ -36,8 +36,11 @@ exports.listTenantDormRoom = async (req,res) => {
         fine += Math.floor(days) * 20
       }
       item.dueDate = dueDate.toUTC().toISO()
-      const found = pay.find((bill)=>bill.user === item.user._id)
-      console.log(pay)
+      console.log(item.user._id)
+      const found = pay.find((bill)=>{
+        return bill.user._id.toString() === item.user._id.toString()
+      })
+      console.log(found)
       if (found) {
         item.paid = true
         item.fine = 0
