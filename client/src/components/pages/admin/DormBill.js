@@ -26,7 +26,7 @@ const DormBill = () => {
       <Row sm={2} md={4} className="g-2">
         {dorms.map((item,index)=>{
           return (
-            <Col key={index} onClick={()=>navigate(`admin/bill/${item._id}`)}>
+            <Col key={index} onClick={()=>navigate(`/admin/bill/${item._id}`)}>
               <Card>
                 <Image style={{height:'12rem',objectFit:'cover'}} src={item.dormImg} fluid rounded/>
                 <Card.Body>
