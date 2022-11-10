@@ -10,9 +10,12 @@ import { composeWithDevTools } from 'redux-devtools-extension';
 import rootReducer from './components/reducers/index';
 import ScrollToTop from "./helpers/ScrollToTop"
 import 'react-toastify/dist/ReactToastify.css';
+import './style.css';
+import { Settings } from 'luxon'
 
+Settings.defaultZone = 'Asia/Bangkok'
+Settings.defaultLocale = 'th'
 const store = createStore(rootReducer,composeWithDevTools());
-
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
