@@ -20,6 +20,7 @@ import AdminDormList from './components/pages/admin/AdminDormList'
 import AdminDormRoomList from './components/pages/admin/AdminDormRoomList'
 import AdminDormRoomDetail from './components/pages/admin/AdminDormRoomDetail'
 import AdminUpdateDormRoom from './components/pages/admin/AdminUpdateDormRoom'
+import DormBill from './components/pages/admin/DormBill'
 
 // page user
 import UserHome from './components/pages/user/UserHome'
@@ -41,6 +42,7 @@ import AdminRoute from './components/routes/AdminRoute'
 
 // Navbar
 import { ToastContainer } from 'react-toastify'
+import NavbarAdmin from './components/layouts/NavbarAdmin'
 
 function App() {
   const dispatch = useDispatch()
@@ -70,61 +72,65 @@ function App() {
         <Route path="/" element={<Login />} />
         <Route path="/register" element={<Register />} />
 
-        <Route path="/admin/index" element={
-          <AdminRoute>
-            <AdminHome />
-          </AdminRoute>
-        } />
-        <Route path="/admin/dashboard" element={
-          <AdminRoute>
-            <AdminDashboard />
-          </AdminRoute>
-        } />
-        <Route path="/admin/dormlist" element={
-          <AdminRoute>
-            <AdminDormList />
-          </AdminRoute>
-        } />
-        <Route path="/admin/manage-user" element={
-          <AdminRoute>
-            <AdminManage />
-          </AdminRoute>
-        } />
-        <Route path="/admin/create-dorm" element={
-          <AdminRoute>
-            <AdminCreateDorm />
-          </AdminRoute>
-        } />
-        <Route path="/admin/dorm/:id" element={
-          <AdminRoute>
-            <AdminDormRoomList />
-          </AdminRoute>
-        } />
-        <Route path="/admin/update-dorm/:id" element={
-          <AdminRoute>
-            <AdminUpdateDorm />
-          </AdminRoute>
-        } />
-        <Route path="/admin/create-dormroom/:id" element={
-          <AdminRoute>
-            <AdminCreateDormRoom />
-          </AdminRoute>
-        } />
-        <Route path="/admin/dorm/room/:id" element={
-          <AdminRoute>
-            <AdminDormRoomDetail />
-          </AdminRoute>
-        } />
-        <Route path="/admin/dorm/update-room/:id" element={
-          <AdminRoute>
-            <AdminUpdateDormRoom />
-          </AdminRoute>
-        } />
-        <Route path="/admin/bill" element={
-          <AdminRoute>
-            <Bill />
-          </AdminRoute>
-        } />
+        <Route element={<NavbarAdmin/>}>
+          <Route path="/admin/index" element={
+            <AdminRoute>
+              <AdminHome />
+            </AdminRoute>
+          } />
+          <Route path="/admin/dashboard" element={
+            <AdminRoute>
+              <AdminDashboard />
+            </AdminRoute>
+          } />
+          <Route path="/admin/dormlist" element={
+            <AdminRoute>
+              <AdminDormList />
+            </AdminRoute>
+          } />
+          <Route path="/admin/manage-user" element={
+            <AdminRoute>
+              <AdminManage />
+            </AdminRoute>
+          } />
+          <Route path="/admin/create-dorm" element={
+            <AdminRoute>
+              <AdminCreateDorm />
+            </AdminRoute>
+          } />
+          <Route path="/admin/dorm/:id" element={
+            <AdminRoute>
+              <AdminDormRoomList />
+            </AdminRoute>
+          } />
+          <Route path="/admin/update-dorm/:id" element={
+            <AdminRoute>
+              <AdminUpdateDorm />
+            </AdminRoute>
+          } />
+          <Route path="/admin/create-dormroom/:id" element={
+            <AdminRoute>
+              <AdminCreateDormRoom />
+            </AdminRoute>
+          } />
+          <Route path="/admin/dorm/room/:id" element={
+            <AdminRoute>
+              <AdminDormRoomDetail />
+            </AdminRoute>
+          } />
+          <Route path="/admin/dorm/update-room/:id" element={
+            <AdminRoute>
+              <AdminUpdateDormRoom />
+            </AdminRoute>
+          } />
+          <Route path="/admin/bill" element={
+            <AdminRoute>
+              <DormBill />
+            </AdminRoute>
+          } />
+        </Route>
+        
+        <Route path='/admin/bill/:dormId/:roomId'/>
         <Route path="/admin/create-bill" element={
           <AdminRoute>
             <CreateBill />
