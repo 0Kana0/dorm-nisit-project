@@ -15,3 +15,11 @@ export const listDormRoomBills = async (authToken,dormId,roomId) => {
     }
   });
 }
+
+export const listTenantsDormRoomBills = async (authToken,dormId,roomId) => {
+  return await axios.get(process.env.REACT_APP_API + `/bill/tenants/${dormId}/${roomId}` ,{
+    headers:{
+      authToken
+    }
+  });
+}
