@@ -1,29 +1,25 @@
 import React, { useState, useEffect } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
 import { Table, Container, Button } from 'react-bootstrap'
 import { ImCheckmark, ImCross } from 'react-icons/im'
 import NavbarAdmin from '../../layouts/NavbarAdmin'
-import { listBills } from '../../functions/bill'
+import { listDormRoomBills } from '../../functions/bill'
 import { useSelector } from 'react-redux'
+import { DateTime } from 'luxon'
 
 const Utilities = () => {
   const { user } = useSelector((state) => ({ ...state }))
+  const { dormId, roomId } = useParams()
 
   const [bills,setBills] = useState([])
 
   useEffect(()=>{
-    listBills(user.token).then((res)=>{
+    listDormRoomBills(user.token,dormId, roomId).then((res)=>{
       setBills(res.data)
     }).catch((err)=>{
       console.log(err)
     })
   },[])
-
-  const options = {
-    day:'numeric',
-    month:'long',
-    year:'numeric'
-  }
 
   const payBill = (currentItem,paid) => {
 
@@ -31,22 +27,25 @@ const Utilities = () => {
 
   const billsTable = bills.map((item,index)=>{
     let fine = 0
-    let dueDate = new Date(item.issueDate)
-    dueDate.setMonth(dueDate.getMonth() + 1)
-    let currentDate = Date.now()
+    let issueDate = DateTime.fromISO(item.issueDate)
+    let dueDate = DateTime.fromISO(item.issueDate).plus({months:1})
+    let currentDate = DateTime.now()
+    console.log(currentDate)
     if (currentDate > dueDate) {
-      fine += (currentDate - dueDate) * 20
+      let diff = currentDate.diff(dueDate,['days'])
+      let days = diff.as('days')
+      fine += Math.floor(days) * 20
     }
     return (
       <tr key={index}>
         <td>{index + 1}</td>
         <td>{item.room.roomID}</td>
-        <td>{new Date(item.issueDate).toLocaleDateString('th-TH',options)}</td>
+        <td>{issueDate.toFormat('d MMMM y')}</td>
         <td>{item.water}</td>
         <td>{item.electric}</td>
         <td>{fine}</td>
         <td>{item.water + item.electric + fine}</td>
-        <td>{new Date(item.dueDate).toLocaleDateString('th-TH',options)}</td>
+        <td>{dueDate.toFormat('d MMMM y')}</td>
         <td>{item.paid ? 
           <>
             <ImCheckmark style={{color:'green'}}/>{' '}
@@ -58,44 +57,43 @@ const Utilities = () => {
           </>
           }
         </td>
-        <td className='d-grid'>
-          {item.paid ?
-            <Button variant="outline-danger" onClick={()=>payBill(item,!item.paid)}>ยกเลิก</Button> :
-            <Button variant="outline-success" onClick={()=>payBill(item,!item.paid)}>ชำระ</Button>
-          }
-        </td>
       </tr>
     )
   })
 
   return (
     <div>
-      <NavbarAdmin />
       <div className='container py-5'>
-        <div className="d-flex justify-content-between">
-          <h3>สาธารณูปโภค</h3>
-          <Link className="btn btn-outline-success" to="/admin/create-bill">เพิ่มบิลค่าไฟ</Link>
+        <div className='d-flex'>
+          <h3 className='flex-fill'>สาธารณูปโภค</h3>
+          <div className="d-flex justify-content-end gap-2">
+            <Link className='btn btn-outline-dark' to={-1}>ย้อนกลับ</Link>
+            <Link className="btn btn-outline-success" to="/admin/create-bill">เพิ่มบิลค่าไฟ</Link>
+          </div>
         </div>
         <hr></hr>
-        <Table responsive hover >
-          <thead>
-            <tr>
-              <th>ลำดับ</th>
-              <th>ห้อง</th>
-              <th>วันที่ออกบิล</th>
-              <th>ค่าน้ำ</th>
-              <th>ค่าไฟ</th>
-              <th>ค่าปรับ</th>
-              <th>รวม</th>
-              <th>หมดเขตวันที่</th>
-              <th>สถานะ</th>
-              <th>รายละเอียด</th>
-            </tr>
-          </thead>
-          <tbody className='table-group-divider'>
-            {billsTable}
-          </tbody>
-        </Table>
+        {billsTable.length > 0 ? 
+          <Table responsive hover >
+            <thead>
+              <tr>
+                <th>ลำดับ</th>
+                <th>ห้อง</th>
+                <th>วันที่ออกบิล</th>
+                <th>ค่าน้ำ</th>
+                <th>ค่าไฟ</th>
+                <th>ค่าปรับ</th>
+                <th>รวม</th>
+                <th>หมดเขตวันที่</th>
+                <th>สถานะ</th>
+              </tr>
+            </thead>
+            <tbody className='table-group-divider'>
+              {billsTable}
+            </tbody>
+          </Table> :
+          <h3>ไม่มี</h3>
+        }
+        
       </div>
     </div>
   )

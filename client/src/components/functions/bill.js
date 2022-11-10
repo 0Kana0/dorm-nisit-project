@@ -7,3 +7,11 @@ export const listBills = async (authToken) => {
     }
   });
 }
+
+export const listDormRoomBills = async (authToken,dormId,roomId) => {
+  return await axios.get(process.env.REACT_APP_API + `/bill/${dormId}/${roomId}` ,{
+    headers:{
+      authToken
+    }
+  });
+}

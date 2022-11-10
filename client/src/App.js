@@ -21,6 +21,7 @@ import AdminDormRoomList from './components/pages/admin/AdminDormRoomList'
 import AdminDormRoomDetail from './components/pages/admin/AdminDormRoomDetail'
 import AdminUpdateDormRoom from './components/pages/admin/AdminUpdateDormRoom'
 import DormBill from './components/pages/admin/DormBill'
+import DormRoomBill from './components/pages/admin/DormRoomBill'
 
 // page user
 import UserHome from './components/pages/user/UserHome'
@@ -31,6 +32,8 @@ import UserDormRoomList from './components/pages/user/UserDormRoomList'
 import UserDormRoomDetail from './components/pages/user/UserDormRoomDetail'
 import UserBookedState from './components/pages/user/UserBookedState'
 import UserDormRoomDetailProfile from './components/pages/user/UserDormRoomDetailProfile'
+import UserBill from './components/pages/user/UserBill'
+import UserMainTain from './components/pages/user/UserMainTain'
 
 // functions
 import { currentUser } from './components/functions/auth'
@@ -128,6 +131,16 @@ function App() {
               <DormBill />
             </AdminRoute>
           } />
+          <Route path="/admin/bill/:dormId" element={
+            <AdminRoute>
+              <DormRoomBill />
+            </AdminRoute>
+        } />
+          <Route path='/admin/bill/:dormId/:roomId' element={
+            <AdminRoute>
+              <Bill />
+            </AdminRoute> 
+          }/>
         </Route>
         
         <Route path='/admin/bill/:dormId/:roomId'/>
@@ -136,6 +149,7 @@ function App() {
             <CreateBill />
           </AdminRoute>
         } />
+        
 
 
         <Route path="/user/index" element={
@@ -176,6 +190,16 @@ function App() {
         <Route path="/user/bookstate" element={
           <UserRoute>
             <UserBookedState />
+          </UserRoute>
+        } />
+        <Route path="/user/UserBill" element={
+          <UserRoute>
+            <UserBill />
+          </UserRoute>
+        } />
+        <Route path="/user/UserMainTain" element={
+          <UserRoute>
+            <UserMainTain />
           </UserRoute>
         } />
       </Routes>

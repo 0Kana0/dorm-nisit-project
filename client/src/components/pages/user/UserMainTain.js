@@ -8,7 +8,7 @@ import { createDorm, listDorm, deleteDorm } from '../../functions/dorm'
 // redux
 import { useSelector } from 'react-redux';
 
-const AdminCreateDorm = () => {
+const UserMainTain = () => {
   const navigate = useNavigate()
   const { user } = useSelector((state) => ({ ...state }))
 
@@ -89,7 +89,7 @@ const AdminCreateDorm = () => {
             </div>
             <div className="col-md-12">
               <label className="col-form-label">เลขห้องพัก</label>
-              <input type="text" className="form-control" name="dormNum" value={values.name} placeholder="กรุณากรอกเลขห้องพัก" required onChange={handleChangeDorm} />
+              <input type="text" className="form-control" name="dormNum" value={values.dormNum} placeholder="กรุณากรอกเลขห้องพัก" required onChange={handleChangeDorm} />
             </div>
             <div className="col-md-12">
               <label className="col-form-label">รหัสนิสิต</label>
@@ -98,15 +98,15 @@ const AdminCreateDorm = () => {
                 <option value="ชาย">ชาย</option>
                 <option value="หญิง">หญิง</option>
               </select> */}
-              <input type="text" className="form-control" name="id" value={values.name} placeholder="ex. 1 มกราคม 25XX" required onChange={handleChangeDorm} />
+              <input type="text" className="form-control" name="id" value={values.id} placeholder=" " required onChange={handleChangeDorm} />
             </div>
             <div className="col-md-12">
               <label className="col-form-label">ชื่อ-นามสกุล</label>
-              <input type="text" className="form-control" name="name" value={values.dormFloor} placeholder="" required onChange={handleChangeDorm} />
+              <input type="text" className="form-control" name="name" value={values.name} placeholder="" required onChange={handleChangeDorm} />
             </div>
             <div className="col-md-12">
               <label className="col-form-label">เบอร์โทรศัพท์</label>
-              <input type="text" className="form-control" name="telNum" value={values.dormRoom} placeholder="" required onChange={handleChangeDorm} />
+              <input type="text" className="form-control" name="telNum" value={values.telNum} placeholder="" required onChange={handleChangeDorm} />
             </div>
             {/* <div className="col-md-12">
               <label className="col-form-label">รูปของหอพัก</label>
@@ -114,7 +114,7 @@ const AdminCreateDorm = () => {
             </div> */}
             <div className="col-md-12">
               <label className="col-form-label">ระบุรายการแจ้งซ่อม</label>
-              <textarea id="" name="menTen" rows="5" cols="33"></textarea>
+              <input type="text" className="form-control" name="repair" value={values.repair} placeholder="" required onChange={handleChangeDorm} />
             </div>
             <div className='d-flex justify-content-center'>
               <button className="mt-5 col-md-6 btn btn-outline-primary profile-button">เพิ่มรายการแจ้งซ่อมสำเร็จ</button>
@@ -126,4 +126,4 @@ const AdminCreateDorm = () => {
   )
 }
 
-export default AdminCreateDorm
+export default UserMainTain
