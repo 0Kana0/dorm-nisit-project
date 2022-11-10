@@ -3,7 +3,9 @@ import NavbarAdmin from '../../layouts/NavbarAdmin'
 import { Link, useParams, useNavigate } from "react-router-dom"
 
 // function
-import { listDormRoomID } from '../../functions/dormRoom'
+import { listDormRoomID, editRoomState } from '../../functions/dormRoom'
+import { listSubmit, createSubmit } from '../../functions/submit';
+import { readUsers, updateUserBookTrue } from '../../functions/user'
 
 // redux
 import { useSelector } from 'react-redux';
@@ -15,9 +17,12 @@ const AdminDormRoomDetail = () => {
 	const [dorm, setDorm] = useState([])
 	const [room, setRoom] = useState([])
 	const [submit, setSubmit] = useState([])
+	const [userdata, setUserdata] = useState([])
 
 	useEffect(() => {
 		loadData(user.token, param.id)
+		loadDataSubmit(user.token, param.id)
+		loadDataUser(user.token, user.id)
 	}, [])
 
 	const loadData = (authtoken, id) => {
@@ -30,7 +35,44 @@ const AdminDormRoomDetail = () => {
 				console.log(err)
 			})
 	}
-	console.log(room)
+
+	const loadDataUser = (authtoken, id) => {
+    readUsers(authtoken, id)
+      .then((res) => {
+        setUserdata(res.data)
+      })
+      .catch((err) => {
+        console.log(err)
+      })
+  }
+	
+	const loadDataSubmit = (authtoken, id) => {
+		listSubmit(authtoken, id)
+			.then((res) => {
+				console.log(res.data)
+				setSubmit(res.data)
+			})
+			.catch((err) => {
+				console.log(err)
+			})
+	}
+	const bookMember = submit.length
+	console.log(bookMember)
+
+	const userSubmit = submit.map((item,index)=>{
+		return (
+			<tr key={item._id}>
+				<th scope="col">{item.user.studentID}</th>
+				<td>{item.user.firstname} {item.user.lastname}</td>
+				<td>{item.user.faculty}</td>
+				<td>{item.user.major}</td>
+				<td>{item.user.classYear}</td>
+				<td><a target="_blank" href={"https://reg.src.ku.ac.th/res/table_std.php?id="+item.user.studentID+"&c_level=Bachelor"}><button className="btn btn-outline-info">ตารางเรียน</button></a></td>
+				<td><Link className="btn btn-outline-warning" to={'/user/dorm/room/profile/' + item.user._id}>ข้อมูลส่วนตัว</Link>	
+				</td>
+			</tr>
+		)
+	})
 
 	const ShowData = () => {
 		if (submit.length > 0) {
@@ -43,12 +85,13 @@ const AdminDormRoomDetail = () => {
 								<th scope="col">ชื่อ</th>
 								<th scope="col">คณะ</th>
 								<th scope="col">สาขา</th>
+								<th scope="col">ปีที่</th>
 								<th scope="col">ตารางเรียน</th>
 								<th scope="col">ข้อมูลส่วนตัว</th>
 							</tr>
 						</thead>
 						<tbody>
-
+							{userSubmit}
 						</tbody>
 					</table>
 				</div>
