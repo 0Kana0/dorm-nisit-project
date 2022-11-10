@@ -3,7 +3,7 @@ const Bill = require('../models/Bill')
 exports.listBills = async (req,res) => {
   try {
     const user = req.user
-    const bills = await Bill.find({user:user.id}).exec()
+    const bills = await Bill.find({}).populate('room').exec()
     console.log(bills)
     res.send(bills)
   } catch (err) {
