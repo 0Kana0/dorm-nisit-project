@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams, useNavigate, Link } from "react-router-dom";
 import { Container, Row, Col, Card, Image } from "react-bootstrap";
 
 import { useSelector } from "react-redux";
@@ -38,7 +38,12 @@ const DormRoomBill = () => {
 
   return (
     <Container className="py-5">
-      <h3>ค่าน้ำค่าไฟแยกตามห้อง</h3>
+      <div className="d-flex">
+        <h3>ค่าน้ำค่าไฟแยกตามห้อง</h3>
+        <div className="flex-fill d-flex justify-content-end">
+          <Link className="btn btn-outline-dark" to={-1}>ย้อนกลับ</Link>
+        </div>
+      </div>
       <hr/>
       <Row sm={2} md={4} className="g-2">
         {dormrooms.map((item,index)=>{
