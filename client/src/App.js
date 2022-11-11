@@ -47,6 +47,7 @@ import AdminRoute from './components/routes/AdminRoute'
 import { ToastContainer } from 'react-toastify'
 import NavbarAdmin from './components/layouts/NavbarAdmin'
 import TenantsBill from './components/pages/admin/TenantsBill'
+import NavbarUser from './components/layouts/NavbarUser'
 
 function App() {
   const dispatch = useDispatch()
@@ -155,59 +156,63 @@ function App() {
             <CreateBill />
           </AdminRoute>
         } />
-        
 
-
+        <Route element={<NavbarUser/>}>
         <Route path="/user/index" element={
           <UserRoute>
             <UserHome />
           </UserRoute>
         } />
-        <Route path="/user/dormlist" element={
-          <UserRoute>
-            <UserDormList />
-          </UserRoute>
-        } />
-        <Route path="/user/dorm/:id" element={
-          <UserRoute>
-            <UserDormRoomList />
-          </UserRoute>
-        } />
-        <Route path="/user/dorm/room/:id" element={
-          <UserRoute>
-            <UserDormRoomDetail />
-          </UserRoute>
-        } />
-        <Route path="/user/dorm/room/profile/:id" element={
-          <UserRoute>
-            <UserDormRoomDetailProfile />
-          </UserRoute>
-        } />
-        <Route path="/user/dashboard" element={
-          <UserRoute>
-            <UserDashboard />
-          </UserRoute>
-        } />
-        <Route path="/user/dashboard/edit" element={
-          <UserRoute>
-            <UserProfileEdit />
-          </UserRoute>
-        } />
-        <Route path="/user/bookstate" element={
-          <UserRoute>
-            <UserBookedState />
-          </UserRoute>
-        } />
-        <Route path="/user/UserBill" element={
-          <UserRoute>
-            <UserBill />
-          </UserRoute>
-        } />
-        <Route path="/user/UserMainTain" element={
-          <UserRoute>
-            <UserMainTain />
-          </UserRoute>
-        } />
+          <Route path="/user/dormlist" element={
+            <UserRoute>
+              <UserDormList />
+            </UserRoute>
+          } />
+          <Route path="/user/dorm/:id" element={
+            <UserRoute>
+              <UserDormRoomList />
+            </UserRoute>
+          } />
+          <Route path="/user/dorm/room/:id" element={
+            <UserRoute>
+              <UserDormRoomDetail />
+            </UserRoute>
+          } />
+          <Route path="/user/dorm/room/profile/:id" element={
+            <UserRoute>
+              <UserDormRoomDetailProfile />
+            </UserRoute>
+          } />
+          <Route path="/user/dashboard" element={
+            <UserRoute>
+              <UserDashboard />
+            </UserRoute>
+          } />
+          <Route path="/user/dashboard/edit" element={
+            <UserRoute>
+              <UserProfileEdit />
+            </UserRoute>
+          } />
+          <Route path="/user/bookstate" element={
+            <UserRoute>
+              <UserBookedState />
+            </UserRoute>
+          } />
+          <Route path="/user/UserBill" element={
+            <UserRoute>
+              <UserBill />
+            </UserRoute>
+          } />
+          <Route path="/user/UserMainTain" element={
+            <UserRoute>
+              <UserMainTain />
+            </UserRoute>
+          } />
+        </Route>
+        
+
+
+        
       </Routes>
       <ToastContainer />
     </div>
