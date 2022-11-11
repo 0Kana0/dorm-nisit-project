@@ -25,7 +25,6 @@ const UserHome = () => {
   }
   return (
     <div>
-			<NavbarUser />
       <head>
       </head>
 			<div className='container py-5'>

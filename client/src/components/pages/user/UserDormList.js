@@ -48,7 +48,6 @@ const UserDormList = () => {
 
 	return (
 		<div>
-			<NavbarUser />
 			<div className='container py-5'>
 				<div className="row">
 					<div className="d-flex justify-content-between align-items-center experience">
