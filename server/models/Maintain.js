@@ -10,10 +10,6 @@ const MaintainSchema = new mongoose.Schema({
     type:ObjectId,
     ref:'dormroom'
   },
-  dorm:{
-    type:ObjectId,
-    ref:'dorm'
-  },
   description:{
     type:String
   },
