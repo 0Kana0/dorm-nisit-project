@@ -46,6 +46,7 @@ import AdminRoute from './components/routes/AdminRoute'
 // Navbar
 import { ToastContainer } from 'react-toastify'
 import NavbarAdmin from './components/layouts/NavbarAdmin'
+import TenantsBill from './components/pages/admin/TenantsBill'
 
 function App() {
   const dispatch = useDispatch()
@@ -139,6 +140,11 @@ function App() {
           <Route path='/admin/bill/:dormId/:roomId' element={
             <AdminRoute>
               <Bill />
+            </AdminRoute> 
+          }/>
+          <Route path='/admin/bill/:dormId/:roomId/:billId' element={
+            <AdminRoute>
+              <TenantsBill />
             </AdminRoute> 
           }/>
         </Route>
