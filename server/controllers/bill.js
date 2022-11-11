@@ -17,40 +17,36 @@ exports.listBills = async (req,res) => {
 
 exports.listTenantDormRoom = async (req,res) => {
   try {
-    const { roomId } = req.params
-    const tenants = await Submit.find({dormroom:roomId}).populate('dormroom').populate('user').exec()
-    const pay = await BillPay.find({room:roomId}).exec()
-    const bill = await Bill.findOne({room:roomId}).exec()
-    const mappedTenants = tenants.map((item,index)=>{
-      if (bill !== null)
-        item = {...bill.toObject(),...item.toObject()}
-      let fine = 0
-      let issueDate = DateTime.fromJSDate(item.issueDate)
-      console.log(issueDate)
-      let dueDate = DateTime.fromJSDate(item.issueDate).plus({months:1})
-      let currentDate = DateTime.now()
+    const { dormId, roomId, billId } = req.params
+    const sm = await Submit.find({dormroom:roomId}).populate('user').populate('dormroom').exec()
+    const bill = await Bill.findOne({_id:billId}).exec()
+    const billPay = await BillPay.find({bill:billId}).exec()
+
+    const mapped = sm.map((item,index)=>{
+      item = {...bill.toObject(), ...item.toObject()}
+      console.log(bill.toObject()._id)
+      console.log(billPay)
+      const found = billPay.find((b)=>(b.user._id.toString() === item.user._id.toString()))
+      fine = 0
+      const dueDate = DateTime.fromJSDate(item.issueDate).plus({months:1})
+      const currentDate = DateTime.now()
       if (currentDate > dueDate) {
-        let diff = currentDate.diff(dueDate,['days'])
-        let days = diff.as('days')
-        console.log('kk')
-        fine += Math.floor(days) * 20
+        fine += Math.floor(currentDate.diff(dueDate,'days').as('days')) * 20
       }
-      item.dueDate = dueDate.toUTC().toISO()
-      console.log(item.user._id)
-      const found = pay.find((bill)=>{
-        return bill.user._id.toString() === item.user._id.toString()
-      })
-      console.log(found)
+      let paid
       if (found) {
-        item.paid = true
-        item.fine = 0
+        paid = true
+        fine = 0
       } else {
-        item.paid = false
-        item.fine = fine
+        paid = false
       }
+      item.fine = fine
+      item.dueDate = dueDate.toJSDate()
+      item.paid = paid
       return item
     })
-    res.send(mappedTenants)
+
+    res.send(mapped)
   } catch (err) {
     console.log(err)
     res.status(500).send('Server Error!')
