@@ -73,7 +73,7 @@ const UserMainTain = () => {
         <div className="row">
           <div className="d-flex justify-content-between align-items-center experience">
             <h3>แจ้งซ่อม</h3>
-            <Link className="btn btn-outline-secondary" to='/admin/dormlist'>ย้อนกลับ</Link>
+            <Link className="btn btn-outline-secondary" to={-1}>ย้อนกลับ</Link>
           </div><br />
         </div><hr />
         <form onSubmit={handleSubmit}>
