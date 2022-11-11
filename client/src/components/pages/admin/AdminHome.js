@@ -2,7 +2,7 @@ import React,{useState} from 'react'
 import NavbarAdmin from '../../layouts/NavbarAdmin'
 import { useSelector } from 'react-redux'
 import Calendar from 'react-calendar';
-
+import 'react-calendar/dist/Calendar.css';
 
 
 const AdminHome = () => {
@@ -10,12 +10,8 @@ const AdminHome = () => {
   const [value, onChange] = useState(new Date());
  
   return (
-    <div>
-      
+    <div>  
       <div>
-        
-        <NavbarAdmin/>
-        <h1>Hello {user.username}</h1>
       </div>
       <div>
         <div className='hotel'>
