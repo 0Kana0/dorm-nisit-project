@@ -42,6 +42,7 @@ const DormRoomBill = () => {
       <hr/>
       <Row sm={2} md={4} className="g-2">
         {dormrooms.map((item,index)=>{
+          console.log(item._id)
           return (
             <Col key={index} onClick={()=>navigate(`/admin/bill/${dormId}/${item._id}`)}>
               <Card>
