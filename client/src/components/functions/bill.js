@@ -16,8 +16,8 @@ export const listDormRoomBills = async (authToken,dormId,roomId) => {
   });
 }
 
-export const listTenantsDormRoomBills = async (authToken,dormId,roomId) => {
-  return await axios.get(process.env.REACT_APP_API + `/bill/tenants/${dormId}/${roomId}` ,{
+export const listTenantsDormRoomBills = async (authToken,dormId,roomId,billId) => {
+  return await axios.get(process.env.REACT_APP_API + `/bill/${dormId}/${roomId}/${billId}` ,{
     headers:{
       authToken
     }
